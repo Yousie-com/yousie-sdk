@@ -1,0 +1,18 @@
+name: yousie_example
+description: "A small app that shows how to use the Yousie SDK for Flutter."
+publish_to: 'none'
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  yousie:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

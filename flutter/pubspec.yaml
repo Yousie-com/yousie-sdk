@@ -1,0 +1,26 @@
+name: yousie
+description: "Yousie SDK for Flutter: reports installs and subscriptions that came through a creator's Yousie link. Android only."
+version: 1.0.0
+homepage: https://yousie.com/developers
+repository: https://github.com/yojimbo45/yousie-sdk
+publish_to: none
+
+environment:
+  sdk: ^3.13.5
+  flutter: '>=3.47.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.yousie.flutter
+        pluginClass: YousieFlutterPlugin

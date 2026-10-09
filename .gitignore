@@ -1,0 +1,19 @@
+# Gradle / Android
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+.kotlin/
+captures/
+.cxx/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+!flutter/example/pubspec.lock
+
+# macOS
+.DS_Store
