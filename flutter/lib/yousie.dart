@@ -62,7 +62,9 @@ class Yousie {
   /// The three `debug…` settings only work in a debug build:
   /// [debugReferrer] is used instead of the Play install referrer
   /// (`utm_source=yousie&utm_medium=affiliate&utm_campaign=<code>&yclid=<click id>`),
-  /// [debugReset] forgets everything the SDK saved each time it starts, and
+  /// [debugReset] forgets what the SDK saved each time it starts (the same
+  /// test click id can be replayed; another one counts as another install),
+  /// and
   /// [debugApiUrl] sends the reports to another origin than
   /// `https://yousie.com`.
   static Future<void> init({

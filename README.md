@@ -40,7 +40,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.yojimbo45:yousie-sdk:1.0.0")
+    implementation("com.github.Yousie-com:yousie-sdk:1.0.0")
 }
 ```
 
@@ -66,9 +66,9 @@ class MyApp : Application() {
 dependencies:
   yousie:
     git:
-      url: https://github.com/yojimbo45/yousie-sdk.git
+      url: https://github.com/Yousie-com/yousie-sdk.git
       path: flutter
-      ref: v1.0.0
+      ref: 1.0.0
 ```
 
 ```dart
@@ -135,7 +135,7 @@ Yousie.trackSubscription(
 );
 ```
 
-Call it for a fresh purchase, not for a restored one. Reporting the same purchase twice is safe: Yousie keeps one. You can use both ways together: your own report replaces the automatic one while it has not been sent yet.
+Call it for a fresh purchase, not for a restored one. Reporting the same purchase twice is safe: Yousie keeps one, the first it received. So when you report purchases yourself, turn the automatic way off (`autoTrackPurchases = false`): otherwise the automatic report can arrive first, and the price and trial flag of yours are not kept.
 
 Yousie books one subscription per install, as **pending**. It becomes earnings for the creator when you confirm it: by hand in your campaign, or from your server with `POST https://yousie.com/api/v1/postback` and your postback secret. The SDK never holds that secret.
 
@@ -146,7 +146,7 @@ Yousie books one subscription per install, as **pending**. It becomes earnings f
 | `autoTrackPurchases` | `true` | `false`: only `trackSubscription` reports purchases. |
 | `logging` | `false` | Prints what the SDK does to logcat, under the tag `Yousie`. |
 | `debugReferrer` | none | Debuggable builds only. Used instead of the Play install referrer. |
-| `debugReset` | `false` | Debuggable builds only. Forgets the SDK's saved state at each start. |
+| `debugReset` | `false` | Debuggable builds only. Forgets the SDK's saved state at each start, so the flow replays. The same test click id can be replayed; another one counts as another install. |
 | `debugApiUrl` | none | Debuggable builds only. Sends the reports to another origin. |
 
 Kotlin: `Yousie.init(context, key, consent, YousieOptions(logging = true))`. Flutter: named parameters of `Yousie.init`.
@@ -178,7 +178,7 @@ Yousie: install: attributed ins_0123456789abcdef
 Yousie: purchase GPA.3345-1234-5678-90123: recorded
 ```
 
-A release build ignores the three `debug…` options.
+Open the creator link at least ten seconds before the first start: Yousie refuses an install that follows its click faster than a real one can (`too_fast`). A release build ignores the three `debug…` options.
 
 ## What leaves the phone
 

@@ -28,8 +28,10 @@ class YousieOptions @JvmOverloads constructor(
     val debugReferrer: String? = null,
 
     /**
-     * Debuggable builds only. Forget everything the SDK saved, each time
+     * Debuggable builds only. Forget what the SDK saved, each time
      * [Yousie.init] runs, so the whole flow replays on the same install.
+     * The same test click id can be replayed as often as needed; another
+     * click id counts as another install.
      */
     val debugReset: Boolean = false,
 

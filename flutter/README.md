@@ -14,9 +14,9 @@ Flutter 3.47 or newer, Android 7.0 (API 24) or newer.
 dependencies:
   yousie:
     git:
-      url: https://github.com/yojimbo45/yousie-sdk.git
+      url: https://github.com/Yousie-com/yousie-sdk.git
       path: flutter
-      ref: v1.0.0
+      ref: 1.0.0
 ```
 
 Nothing to add in your Android folder.
@@ -66,4 +66,4 @@ Yousie.init(
 
 Then `adb logcat -s Yousie`. The `debug…` options only work in a debug build.
 
-Consent, options, what leaves the phone and how the SDK behaves are described in the [repository README](https://github.com/yojimbo45/yousie-sdk#readme). The plugin is a thin layer over the Android library in the same repository.
+Consent, options, what leaves the phone and how the SDK behaves are described in the [repository README](https://github.com/Yousie-com/yousie-sdk#readme). The plugin is a thin layer over the Android library in the same repository.

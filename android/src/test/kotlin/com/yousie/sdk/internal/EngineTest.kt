@@ -590,11 +590,9 @@ class EngineTest {
 
     // ─── Debug ──────────────────────────────────────────────────────────
 
-    @Test
-    fun aDebugResetReplaysTheFlow() {
-        attributedInstall()
-        referrer.next = ReferrerRead.Value(LINK, clock)
-        api.installAnswers += InstallAnswer.attributed("ins_2")
+    private fun debugStart(link: String) {
+        referrer.next = ReferrerRead.Value(link, null)
+        api.installAnswers += InstallAnswer.attributed("ins_debug")
         val engine = Engine(
             sdkKey = KEY,
             store = store,
@@ -605,13 +603,40 @@ class EngineTest {
             now = { clock },
             log = {},
             debugReset = true,
+            newInstallId = { "install-${++installIds}" },
         )
         engine.consent = YousieConsent.GRANTED
         engine.launch()
+    }
 
-        assertEquals(2, referrer.reads)
-        assertEquals(2, api.installs.size)
-        assertEquals("ins_2", store.string(Keys.INSTALL_REF))
+    @Test
+    fun aDebugResetReplaysTheSameClickUnderTheSameInstallId() {
+        debugStart(LINK)
+        store.put(Keys.SUBSCRIPTION_SETTLED, true)
+        debugStart(LINK)
+        debugStart(LINK)
+
+        assertEquals(3, referrer.reads)
+        assertEquals(listOf("install-1", "install-1", "install-1"), api.installs.map { it.installId })
+        assertEquals("ins_debug", store.string(Keys.INSTALL_REF))
+        assertFalse(store.flag(Keys.SUBSCRIPTION_SETTLED))
+    }
+
+    @Test
+    fun aDebugResetWithAnotherClickIsAnotherInstall() {
+        debugStart(LINK)
+        debugStart(LINK.replace(CLICK, "ZzZzZzZzZzZzZzZzZzZz99"))
+        debugStart(ORGANIC)
+
+        assertEquals(listOf("install-1", "install-2"), api.installs.map { it.installId })
+        assertEquals(listOf(CLICK, "ZzZzZzZzZzZzZzZzZzZz99"), api.installs.map { it.clickId })
+        assertEquals(setOf(Keys.REFERRER_CHECKED), store.keys())
+    }
+
+    @Test
+    fun withoutADebugResetNothingOfItIsKept() {
+        attributedInstall()
+        assertNull(store.string(Keys.DEBUG_CLICK))
     }
 }
 

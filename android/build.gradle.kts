@@ -68,7 +68,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.github.yojimbo45"
+                groupId = "com.github.Yousie-com"
                 artifactId = "yousie-sdk"
                 version = sdkVersion
             }

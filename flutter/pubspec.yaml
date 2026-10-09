@@ -2,7 +2,7 @@ name: yousie
 description: "Yousie SDK for Flutter: reports installs and subscriptions that came through a creator's Yousie link. Android only."
 version: 1.0.0
 homepage: https://yousie.com/developers
-repository: https://github.com/yojimbo45/yousie-sdk
+repository: https://github.com/Yousie-com/yousie-sdk
 publish_to: none
 
 environment:

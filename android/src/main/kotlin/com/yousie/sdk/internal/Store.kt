@@ -80,6 +80,13 @@ internal object Keys {
      */
     const val SUBSCRIPTION_SETTLED = "subscription_settled"
 
+    /**
+     * String: the click id of the last debug run. Written only under
+     * YousieOptions.debugReset, which keeps the install id while the same
+     * test click is replayed and makes a new one for another click.
+     */
+    const val DEBUG_CLICK = "debug_click"
+
     val ALL = arrayOf(
         REFERRER_CHECKED,
         REFERRER_ASKED_AT,
@@ -91,6 +98,7 @@ internal object Keys {
         OUTBOX,
         AUTO_SEEN,
         SUBSCRIPTION_SETTLED,
+        DEBUG_CLICK,
     )
 }
 

@@ -99,7 +99,11 @@ internal class Engine(
     /** Once per process. */
     fun launch() {
         if (debugReset) {
-            store.remove(*Keys.ALL)
+            // Everything but the install id and the click it was made for:
+            // under the same id Yousie answers a click it has already booked
+            // the same way again, so one test click can be replayed as often
+            // as needed (checkReferrer drops the id for another click).
+            store.remove(*Keys.ALL.filter { it != Keys.INSTALL_ID && it != Keys.DEBUG_CLICK }.toTypedArray())
             log("debug reset: saved state cleared")
         }
         if (!store.flag(Keys.REFERRER_CHECKED)) {
@@ -151,6 +155,11 @@ internal class Engine(
             }
         }
         val clickId = ClickId.fromReferrer(value?.referrer)
+        if (debugReset) {
+            // Another test click is another install.
+            if (clickId != store.string(Keys.DEBUG_CLICK)) store.remove(Keys.INSTALL_ID)
+            if (clickId == null) store.remove(Keys.DEBUG_CLICK) else store.put(Keys.DEBUG_CLICK, clickId)
+        }
         if (clickId != null) {
             store.put(Keys.CLICK_ID, clickId)
             store.put(Keys.CLICK_ID_AT, time)
