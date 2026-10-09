@@ -20,8 +20,8 @@ import org.junit.Test
  *
  * Each click id is a fresh, unused one of a link to the app the SDK key
  * belongs to (open the link, read `yclid` in the store address), and at
- * least ten seconds old: the server refuses an install that follows its
- * click faster than a real one can (`too_fast`).
+ * least a quarter of a minute old: the server refuses an install that
+ * follows its click faster than a real one can (`too_fast`).
  */
 class LocalServerTest {
     private val url = System.getProperty("yousie.e2e.url").orEmpty()

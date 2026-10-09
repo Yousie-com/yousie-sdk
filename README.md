@@ -178,7 +178,7 @@ Yousie: install: attributed ins_0123456789abcdef
 Yousie: purchase GPA.3345-1234-5678-90123: recorded
 ```
 
-Open the creator link at least ten seconds before the first start: Yousie refuses an install that follows its click faster than a real one can (`too_fast`). A release build ignores the three `debug…` options.
+Let about fifteen seconds pass between opening the creator link and the first start: Yousie refuses an install that follows its click faster than a real one can (`too_fast`). A release build ignores the three `debug…` options.
 
 ## What leaves the phone
 
